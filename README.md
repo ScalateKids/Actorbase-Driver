@@ -24,4 +24,7 @@ project as a depencency in build.sbt:
 ```scala
 libraryDependencies += "com.actorbase" %% "actorbase-driver" % "1.0"
 ```
+For further details see the [WIKI](../../wiki).
+## License
 
+See the [LICENSE](LICENSE) file for license rights and limitations (MIT).
