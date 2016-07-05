@@ -219,6 +219,7 @@ class ActorbaseDriver (val connection: ActorbaseDriver.Connection) (implicit val
                 case "UndefinedCollection" => throw UndefinedCollectionExc("Undefined collection")
                 case "DuplicatedKey" => throw DuplicateKeyExc("Inserting duplicate key")
                 case "NoPrivileges" => throw WrongCredentialsExc("Insufficient permissions")
+                case "InvalidChar" => throw InternalErrorExc("Invalid or malformed request")
                 case _ =>
               }
             }
@@ -464,10 +465,7 @@ class ActorbaseDriver (val connection: ActorbaseDriver.Connection) (implicit val
   def getCollections: ActorbaseCollectionMap = {
     var colls = TreeMap.empty[String, ActorbaseCollection]
     try {
-      listCollections map (x => {
-        println("calling for getCollection("+x.head._2.head+","+ x.head._1+")")
-        colls += (x.head._2.head+"."+x.head._1 -> getCollection(x.head._2.head, x.head._1))
-      } )
+      listCollections map (x => colls += (x.head._2.head+"."+x.head._1 -> getCollection(x.head._2.head, x.head._1)))
     } catch {
       case uce:UndefinedCollectionExc =>
     }
