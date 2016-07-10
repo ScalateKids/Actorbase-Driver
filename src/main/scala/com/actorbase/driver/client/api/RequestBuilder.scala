@@ -43,7 +43,7 @@ case class RequestBuilder(
   url: Option[String],
   user: Option[String],
   password: Option[String],
-  headers: Seq[(String, String)],
+  headers: Seq[(String, String)] = Seq("Connection" -> "keep-alive"),
   body: Option[String]) {
 
   /**
